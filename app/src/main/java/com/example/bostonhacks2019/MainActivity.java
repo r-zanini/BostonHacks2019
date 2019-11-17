@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        User newUser = new User("Sonam", "Tamang", "192.168.1.157:8090");
+        User newUser = new User("Sonam", "Tamang", "http://192.168.1.157:8090/speaker");
 
         SQLiteDatabase mydatabase = openOrCreateDatabase("users",MODE_PRIVATE,null);
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS userInfo(firstName VARCHAR, lastName VARCHAR,speakerAddress VARCHAR);");

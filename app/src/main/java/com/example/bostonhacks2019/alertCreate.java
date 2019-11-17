@@ -54,16 +54,16 @@ public class alertCreate extends AppCompatActivity {
         //get references to medication editText and timePicker
         medicationName = findViewById(R.id.medicationNameText);
         timePicker = findViewById(R.id.simpleTimePicker);
+        
         String hour = Integer.toString(timePicker.getHour());
         String minutes = Integer.toString(timePicker.getMinute());
 
         Time dueTime = Time.valueOf(hour + ':' + minutes + ":00");
 
-        AlarmClock newAlarmClock = new AlarmClock();
-
         //create a new alert object and store it in the database
         alert newAlert = new alert(medicationName.getText().toString(), dueTime);
 
+        Log.d("medicationName onCreate", newAlert.getMedication());
 
         SQLiteDatabase mydatabase = openOrCreateDatabase("users",MODE_PRIVATE,null);
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS alerts(medicationName VARCHAR, dueTime  TIME);");
@@ -71,8 +71,9 @@ public class alertCreate extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put("medicationName", newAlert.getMedication());
         values.put("dueTime",newAlert.getDueTime().toString());
-        mydatabase.insert("alerts", null, values);
+        long rowId = mydatabase.insert("alerts", null, values);
 
+        Log.d("Alertrow inserted", Long.toString(rowId));
 //        Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
 //        i.putExtra(AlarmClock.EXTRA_HOUR, hour + Integer.parseInt(hour));
 //        i.putExtra(AlarmClock.EXTRA_MINUTES, minutes + Integer.parseInt(minutes));
@@ -87,7 +88,7 @@ public class alertCreate extends AppCompatActivity {
 
         Log.d("DateOut",today.toString());
 
-        newAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,today.toEpochSecond(ZoneOffset.UTC) + ((timePicker.getMinute() + timePicker.getHour()*60)*60000),24*60*60*1000,newPendingIntent);
+        newAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,today.toEpochSecond(ZoneOffset.UTC) + ((timePicker.getMinute() + timePicker.getHour()*60)*60000),24L*60L*60L*1000L,newPendingIntent);
 
 
         //startActivity(i);
