@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BostonHacks2019</string>
     <string name="title_activity_create_alert">CreateAlert</string>
+    <string name="alarm_on_off">Alarm On/Off</string>
 </resources>

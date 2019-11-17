@@ -3,7 +3,13 @@ package com.example.bostonhacks2019;
 public class User {
     private String firstName;
     private String lastName;
-    private int age;
+    private String speakerAddress;
+
+    public User(String firstName, String lastName, String speakerAddress) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.speakerAddress = speakerAddress;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -21,11 +27,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return age;
+    public String getSpeakerAddress() {
+        return speakerAddress;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setSpeakerAddress(String speakerAddress) {
+        this.speakerAddress = speakerAddress;
     }
 }

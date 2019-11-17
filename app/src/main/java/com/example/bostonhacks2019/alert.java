@@ -5,8 +5,12 @@ import android.provider.AlarmClock;
 public class alert {
 
     private String medication;
-    private AlarmClock dueTime;
+    private String dueTime;
 
+    public alert(String medication, String dueTime) {
+        this.medication = medication;
+        this.dueTime = dueTime;
+    }
 
     public String getMedication() {
         return medication;
@@ -16,11 +20,11 @@ public class alert {
         this.medication = medication;
     }
 
-    public AlarmClock getDueTime() {
+    public String getDueTime() {
         return dueTime;
     }
 
-    public void setDueTime(AlarmClock dueTime) {
+    public void setDueTime(String dueTime) {
         this.dueTime = dueTime;
     }
 }
