@@ -19,8 +19,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SQLiteDatabase mydatabase = openOrCreateDatabase("alerts",MODE_PRIVATE,null);
-        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS newUSERS ()");
+        Intent i = getIntent();
+
+        //if there are already objects passed from intent, retrieve them
+        if (i.getExtras() != null){
+
+        }
+
+        SQLiteDatabase mydatabase = openOrCreateDatabase("alerts_database",MODE_PRIVATE,null);
+        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS existingAlerts(firstName VARCHAR, lastName VARCHAR,Password VARCHAR);");
+
+
     }
 
     public void createAlert(View view){
@@ -28,4 +37,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+
+    //add alerts to recycler View
+    public void addItem(String item){
+
+    }
 }

@@ -22,21 +22,22 @@ public class alertCreate extends AppCompatActivity {
 
         Spinner spinner = (Spinner) findViewById(R.id.alertTypeSpinner);
         List<String> categories = new ArrayList<String>();
-        categories.add("Alert");
-        categories.add("");
+        categories.add("Medication");
 
-        // Creating adapter for spinner
+        // Creating adapter for spinner and add categories
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-
-        // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
     }
 
     public void createAlertAndReturnToMain(View vew){
+
+        //create a new alert object and store it in the database
+        alert newAlert = new alert();
+
+
+
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
     }

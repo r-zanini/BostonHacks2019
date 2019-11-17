@@ -11,22 +11,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
+        android:layout_marginTop="33dp"
         android:layout_marginEnd="164dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="50dp"
         android:onClick="createAlertAndReturnToMain"
         android:text="Create Alert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/simpleTimePicker"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/medicationNameText"
+        android:layout_width="177dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:hint="medication name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/medicationName"
+        app:layout_constraintTop_toBottomOf="@+id/alertTypeSpinner" />
 
     <Spinner
         android:id="@+id/alertTypeSpinner"
-        android:layout_width="212dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="59dp"
+        android:layout_width="182dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintStart_toEndOf="@+id/alertType"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/medicationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="47dp"
+        android:text="Medication Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alertType" />
 
     <TextView
         android:id="@+id/alertType"
@@ -38,27 +67,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/ConnectToFitBit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="48dp"
-        android:text="Connect To FitBit"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertType" />
 
-    <CheckBox
-        android:id="@+id/checkBox2"
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="130dp"
-        android:text="Yes"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="16dp"
+        android:text="Alert Due Time"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ConnectToFitBit"
-        app:layout_constraintTop_toBottomOf="@+id/alertTypeSpinner" />
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicationName" />
+
+    <TimePicker
+        android:id="@+id/simpleTimePicker"
+        android:layout_width="266dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="48dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
