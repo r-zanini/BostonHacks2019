@@ -2,11 +2,14 @@ package com.example.bostonhacks2019;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.AlarmClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -14,8 +17,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 public class alertCreate extends AppCompatActivity {
 
@@ -49,18 +56,8 @@ public class alertCreate extends AppCompatActivity {
         timePicker = findViewById(R.id.simpleTimePicker);
         String hour = Integer.toString(timePicker.getHour());
         String minutes = Integer.toString(timePicker.getMinute());
-        String dueTime = hour + minutes;
-        String amorpm;
 
-        if ( timePicker.getHour() == 0){
-            amorpm = "AM";
-        } else if ( timePicker.getHour()== 12) {
-            amorpm = "PM";
-        } else if ( timePicker.getHour() > 12) {
-            amorpm = "PM";
-        } else {
-            amorpm = "AM";
-        }
+        Time dueTime = Time.valueOf(hour + ':' + minutes + ":00");
 
         AlarmClock newAlarmClock = new AlarmClock();
 
@@ -69,17 +66,40 @@ public class alertCreate extends AppCompatActivity {
 
 
         SQLiteDatabase mydatabase = openOrCreateDatabase("users",MODE_PRIVATE,null);
-        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS alerts(medicationName VARCHAR, dueTime  VARCHAR);");
+        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS alerts(medicationName VARCHAR, dueTime  TIME);");
 
         ContentValues values = new ContentValues();
         values.put("medicationName", newAlert.getMedication());
-        values.put("dueTime",newAlert.getDueTime());
+        values.put("dueTime",newAlert.getDueTime().toString());
         mydatabase.insert("alerts", null, values);
 
-        Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
-        i.putExtra(AlarmClock.EXTRA_HOUR, hour + Integer.parseInt(hour));
-        i.putExtra(AlarmClock.EXTRA_MINUTES, minutes + Integer.parseInt(minutes));
-        startActivity(i);
+//        Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+//        i.putExtra(AlarmClock.EXTRA_HOUR, hour + Integer.parseInt(hour));
+//        i.putExtra(AlarmClock.EXTRA_MINUTES, minutes + Integer.parseInt(minutes));
+//        startActivity(i);
+
+        AlarmManager newAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent i = new Intent(this,speakerRequest.class);
+        i.putExtra("medication",newAlert.getMedication());
+        PendingIntent newPendingIntent = PendingIntent.getActivity(this,0,i,0);
+
+        LocalDateTime today = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
+
+        Log.d("DateOut",today.toString());
+
+        newAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,today.toEpochSecond(ZoneOffset.UTC) + ((timePicker.getMinute() + timePicker.getHour()*60)*60000),24*60*60*1000,newPendingIntent);
+
+
+        //startActivity(i);
+
+
+
+
+
+
+
+
+
 
         Intent i2 = new Intent(getApplicationContext(), MainActivity.class);
         i2.putExtra("Alert status","Success");

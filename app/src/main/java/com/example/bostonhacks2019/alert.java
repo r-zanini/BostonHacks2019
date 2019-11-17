@@ -2,12 +2,14 @@ package com.example.bostonhacks2019;
 
 import android.provider.AlarmClock;
 
+import java.sql.Time;
+
 public class alert {
 
     private String medication;
-    private String dueTime;
+    private Time dueTime;
 
-    public alert(String medication, String dueTime) {
+    public alert(String medication, Time dueTime) {
         this.medication = medication;
         this.dueTime = dueTime;
     }
@@ -20,11 +22,11 @@ public class alert {
         this.medication = medication;
     }
 
-    public String getDueTime() {
+    public Time getDueTime() {
         return dueTime;
     }
 
-    public void setDueTime(String dueTime) {
+    public void setDueTime(Time dueTime) {
         this.dueTime = dueTime;
     }
 }
