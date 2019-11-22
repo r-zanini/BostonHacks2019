@@ -54,7 +54,7 @@ public class alertCreate extends AppCompatActivity {
         //get references to medication editText and timePicker
         medicationName = findViewById(R.id.medicationNameText);
         timePicker = findViewById(R.id.simpleTimePicker);
-        
+
         String hour = Integer.toString(timePicker.getHour());
         String minutes = Integer.toString(timePicker.getMinute());
 
